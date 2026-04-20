@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Musanze MyCity</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+body {font-family:'Outfit',sans-serif;background:#faf8f4;}
+.hero {background: linear-gradient(135deg,#1a3a2a,#2d6a4f);color:white;}
+.btn {background:#2d6a4f;color:white;padding:12px 22px;border-radius:999px;}
+.btn:hover {background:#52b788;}
+.card {background:white;padding:20px;border-radius:14px;box-shadow:0 8px 20px rgba(0,0,0,0.05);}
+.hidden {display:none;}
+</style>
+</head>
+
+<body>
+
+<!-- HERO -->
+<section class="hero text-center py-20">
+
+<img src="logo.png" class="w-20 mx-auto mb-4">
+
+<h1 class="text-4xl font-semibold" style="font-family:'DM Serif Display'">
+Discover Musanze – My City
+</h1>
+
+<p class="mt-3 text-white/80">Explore • Play • Invest</p>
+
+<button onclick="startPayment()" class="btn mt-6">
+Unlock Experience ($20)
+</button>
+
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="py-16 text-center">
+<h2 class="text-3xl font-semibold mb-10" style="font-family:'DM Serif Display'">
+How It Works
+</h2>
+
+<div class="grid md:grid-cols-4 gap-6 px-6">
+
+<div class="card">
+<i data-lucide="qr-code"></i>
+<p class="mt-2">Scan & Access</p>
+</div>
+
+<div class="card">
+<i data-lucide="credit-card"></i>
+<p class="mt-2">Pay & Unlock</p>
+</div>
+
+<div class="card">
+<i data-lucide="map"></i>
+<p class="mt-2">Choose Route</p>
+</div>
+
+<div class="card">
+<i data-lucide="trophy"></i>
+<p class="mt-2">Explore & Win</p>
+</div>
+
+</div>
+</section>
+
+<!-- GAME -->
+<section id="game" class="hidden text-center py-16 px-6">
+
+<h2 class="text-3xl font-semibold mb-4">Game Started</h2>
+
+<button onclick="getLocation()" class="btn">
+<i data-lucide="map-pin"></i> Check Location
+</button>
+
+<p id="location" class="mt-4 text-sm text-gray-600"></p>
+
+<div class="grid md:grid-cols-3 gap-6 mt-10">
+
+<div class="card">
+<i data-lucide="droplets"></i>
+<h3 class="mt-2 font-semibold">Water Station</h3>
+<p class="text-sm">Assist community and take photo</p>
+</div>
+
+<div class="card">
+<i data-lucide="school"></i>
+<h3 class="mt-2 font-semibold">School Mission</h3>
+<p class="text-sm">Interact with students</p>
+</div>
+
+<div class="card">
+<i data-lucide="leaf"></i>
+<h3 class="mt-2 font-semibold">Farm Story</h3>
+<p class="text-sm">Discover crops & stories</p>
+</div>
+
+</div>
+
+<button onclick="downloadCertificate()" class="btn mt-8">
+<i data-lucide="award"></i> Download Certificate
+</button>
+
+</section>
+
+<!-- MAP -->
+<section class="py-16 text-center">
+
+<h2 class="text-3xl mb-6" style="font-family:'DM Serif Display'">
+Explore Musanze
+</h2>
+
+<img src="map.jpg" class="mx-auto rounded-xl shadow-lg max-w-4xl w-full">
+
+</section>
+
+<!-- INVESTMENT -->
+<section class="py-16 bg-white text-center">
+
+<h2 class="text-3xl mb-6" style="font-family:'DM Serif Display'">
+Investment Opportunities
+</h2>
+
+<div class="grid md:grid-cols-3 gap-6 px-6">
+
+<div class="card">
+<i data-lucide="building"></i>
+<p class="mt-2">Tourism & Lodges</p>
+</div>
+
+<div class="card">
+<i data-lucide="sprout"></i>
+<p class="mt-2">Agri-business</p>
+</div>
+
+<div class="card">
+<i data-lucide="bike"></i>
+<p class="mt-2">Cycling Tourism</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- CONTACT -->
+<section class="text-center py-12">
+<a href="mailto:beyondgorillasexperience@gmail.com" class="btn">
+Contact Us
+</a>
+</section>
+
+<!-- WHATSAPP -->
+<a href="https://wa.me/250788495604"
+class="fixed bottom-6 right-6 bg-green-500 text-white p-4 rounded-full shadow-lg">
+<i data-lucide="message-circle"></i>
+</a>
+
+<script>
+lucide.createIcons();
+
+function startPayment() {
+  alert("Payment successful (demo)");
+  document.getElementById("game").classList.remove("hidden");
+}
+
+function getLocation() {
+  navigator.geolocation.getCurrentPosition(function(pos){
+    document.getElementById("location").innerHTML =
+    "Lat: "+pos.coords.latitude+"<br>Lng: "+pos.coords.longitude;
+  });
+}
+
+function downloadCertificate() {
+  const blob = new Blob(["Musanze Explorer"], {type:'text/plain'});
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = "certificate.txt";
+  link.click();
+}
+</script>
+
+</body>
+</html>
