@@ -6,15 +6,14 @@
 <title>Musanze MyCity</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
-
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
 body {font-family:'Outfit',sans-serif;background:#faf8f4;}
 .hero {background: linear-gradient(135deg,#1a3a2a,#2d6a4f);color:white;}
-.btn {background:#2d6a4f;color:white;padding:14px 26px;border-radius:999px;}
-.btn-alt {background:#f4a261;color:white;padding:14px 26px;border-radius:999px;}
-.card {background:white;padding:25px;border-radius:18px;box-shadow:0 10px 30px rgba(0,0,0,0.05);}
+.btn {background:#2d6a4f;color:white;padding:14px 24px;border-radius:999px;}
+.btn-alt {background:#f4a261;color:white;padding:14px 24px;border-radius:999px;}
+.card {background:white;padding:20px;border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,0.05);}
 .hidden {display:none;}
 </style>
 </head>
@@ -23,158 +22,143 @@ body {font-family:'Outfit',sans-serif;background:#faf8f4;}
 
 <!-- HERO -->
 <section class="hero text-center py-28 px-6">
-
-<h1 class="text-5xl" style="font-family:'DM Serif Display'">
-Musanze MyCity
-</h1>
+<h1 class="text-5xl" style="font-family:'DM Serif Display'">Musanze MyCity</h1>
 
 <p class="mt-6 max-w-xl mx-auto text-white/80">
-Explore Musanze through missions, people, and real opportunities.
-Not just tourism — an experience and an investment journey.
+Explore Musanze through missions, people and opportunity.
 </p>
 
 <div class="mt-10 flex gap-4 justify-center">
 <button onclick="startExperience()" class="btn">Start Experience</button>
 <a href="#invest" class="btn-alt">Invest in Musanze</a>
 </div>
-
 </section>
 
 <!-- HOW GAME WORKS -->
-<section class="py-20 text-center px-6">
-
-<h2 class="text-3xl mb-10" style="font-family:'DM Serif Display'">
-How It Works
-</h2>
+<section class="py-20 text-center">
+<h2 class="text-3xl mb-10">How It Works</h2>
 
 <div class="grid md:grid-cols-4 gap-6 max-w-5xl mx-auto">
-
-<div class="card">1. Register</div>
-<div class="card">2. Pay & Unlock</div>
-<div class="card">3. Follow Missions</div>
-<div class="card">4. Earn Rewards</div>
-
+<div class="card">Register</div>
+<div class="card">Pay</div>
+<div class="card">Explore</div>
+<div class="card">Earn</div>
 </div>
-
 </section>
 
 <!-- ROUTES -->
-<section class="py-20 bg-white text-center px-6">
-
+<section class="py-20 bg-white text-center">
 <h2 class="text-3xl mb-10">Routes</h2>
 
-<div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+<div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
 
 <div class="card">
 <h3>Cultural Route</h3>
-<p>Village life, traditions, storytelling</p>
-<button onclick="showRoute('cultural')" class="btn mt-4">View</button>
+<button onclick="openRoute('cultural')" class="btn mt-3">View</button>
 </div>
 
 <div class="card">
 <h3>Cycling Route</h3>
-<p>Trails, ARCC, cycling culture</p>
-<button onclick="showRoute('cycling')" class="btn mt-4">View</button>
+<button onclick="openRoute('cycling')" class="btn mt-3">View</button>
 </div>
 
 <div class="card">
 <h3>Agri Route</h3>
-<p>Potatoes, Imbanda, farming systems</p>
-<button onclick="showRoute('agri')" class="btn mt-4">View</button>
+<button onclick="openRoute('agri')" class="btn mt-3">View</button>
 </div>
 
 </div>
+</section>
 
 <!-- ROUTE DETAILS -->
-<div id="routeDetails" class="mt-10 max-w-xl mx-auto"></div>
+<section id="routePage" class="hidden text-center py-20 px-6">
+<h2 id="routeTitle" class="text-3xl mb-6"></h2>
+<p id="routeContent" class="max-w-xl mx-auto text-gray-600"></p>
 
+<button onclick="backRoutes()" class="btn mt-6">Back</button>
 </section>
 
 <!-- GAME -->
-<section id="game" class="hidden text-center py-20 px-6">
-
+<section id="game" class="hidden text-center py-20">
 <h2 class="text-3xl">Your Missions</h2>
 
-<div class="mt-6">
-
-<div class="card">Visit a farm and learn about potatoes</div>
-<div class="card">Meet a local and record a story</div>
-<div class="card">Buy and taste Imbanda bread</div>
-
+<div class="mt-6 space-y-4">
+<div class="card">Visit a potato farm</div>
+<div class="card">Meet a local family</div>
+<div class="card">Taste Imbanda bread</div>
 </div>
 
-<button onclick="getLocation()" class="btn mt-8">Check Location</button>
+<button onclick="getLocation()" class="btn mt-6">Check Location</button>
 <p id="location"></p>
 
 <button onclick="downloadCertificate()" class="btn mt-6">
-Get Certificate
+Download Certificate
 </button>
-
 </section>
 
 <!-- INVEST -->
-<section id="invest" class="py-20 text-center px-6">
-
+<section id="invest" class="py-20 text-center">
 <h2 class="text-3xl">Invest in Musanze</h2>
 
-<p class="max-w-xl mx-auto text-gray-600 mt-4">
-Musanze is a growing hub for tourism, agriculture, and business,
-with strong opportunities in hospitality, agri-value chains,
-and community-based experiences. :contentReference[oaicite:1]{index=1}
+<p class="max-w-xl mx-auto mt-4 text-gray-600">
+Tourism, agriculture, cycling and community experiences offer strong opportunities.
 </p>
-
 </section>
 
-<!-- FORM -->
-<section class="py-20 bg-white text-center px-6">
-
-<h2 class="text-3xl mb-6">Join the Experience</h2>
+<!-- PARTNER FORM -->
+<section class="py-20 bg-white text-center">
+<h2 class="text-3xl mb-6">Partner With Us</h2>
 
 <form class="max-w-md mx-auto space-y-4">
 
-<input type="text" placeholder="Your Name" class="w-full p-3 border rounded">
-<input type="email" placeholder="Email" class="w-full p-3 border rounded">
+<input placeholder="Name" class="w-full p-3 border rounded">
+<input placeholder="Email" class="w-full p-3 border rounded">
+
 <select class="w-full p-3 border rounded">
-<option>Select Route</option>
-<option>Cultural</option>
-<option>Cycling</option>
-<option>Agri</option>
+<option>Area of Interest</option>
+<option>Agriculture</option>
+<option>Tourism</option>
+<option>Education</option>
+<option>Sports</option>
 </select>
 
-<button type="submit" class="btn w-full">Submit</button>
+<button class="btn w-full">Submit</button>
 
 </form>
-
 </section>
 
 <!-- LINKS -->
 <section class="text-center py-10">
 <a href="https://www.beyondthegorillasexperience.com/">BGE</a> |
 <a href="https://visitrwanda.com/">Visit Rwanda</a> |
-<a href="https://www.musanze.gov.rw/about/menya-akarere-1">Musanze District</a>
+<a href="https://www.musanze.gov.rw/about/menya-akarere-1">Musanze</a>
 </section>
 
 <script>
 
 function startExperience(){
-alert("Experience unlocked (demo)");
 document.getElementById("game").classList.remove("hidden");
 }
 
-function showRoute(route){
-let content = "";
+function openRoute(type){
+document.getElementById("routePage").classList.remove("hidden");
 
-if(route==="cultural"){
-content="Explore village life, traditions, and storytelling.";
+if(type==="cultural"){
+document.getElementById("routeTitle").innerHTML="Cultural Route";
+document.getElementById("routeContent").innerHTML="Village life, traditions, storytelling.";
 }
-if(route==="cycling"){
-content="Ride through Musanze and discover cycling culture.";
+if(type==="cycling"){
+document.getElementById("routeTitle").innerHTML="Cycling Route";
+document.getElementById("routeContent").innerHTML="Explore Musanze through cycling trails.";
 }
-if(route==="agri"){
-content="Learn about potatoes and local food systems.";
+if(type==="agri"){
+document.getElementById("routeTitle").innerHTML="Agri Route";
+document.getElementById("routeContent").innerHTML="Potatoes, Imbanda, farming systems.";
+}
 }
 
-document.getElementById("routeDetails").innerHTML = content;
+function backRoutes(){
+document.getElementById("routePage").classList.add("hidden");
 }
 
 function getLocation(){
@@ -185,67 +169,13 @@ document.getElementById("location").innerHTML =
 }
 
 function downloadCertificate(){
-const blob=new Blob(["Musanze Explorer"],{type:'text/plain'});
-const link=document.createElement('a');
-link.href=URL.createObjectURL(blob);
-link.download="certificate.txt";
-link.click();
-}
+const content = `
+MUSANZE EXPLORER CERTIFICATE
 
-</script>
+This certifies that you completed the Musanze MyCity experience.
+`;
 
-</body>
-</html>">
-
-<h2 class="text-3xl">Your Journey Begins</h2>
-
-<button onclick="getLocation()" class="btn mt-6">
-Check My Location
-</button>
-
-<p id="location" class="mt-4 text-sm text-gray-600"></p>
-
-<button onclick="downloadCertificate()" class="btn mt-10">
-Download Certificate
-</button>
-
-</section>
-
-<!-- WHATSAPP -->
-<a href="https://wa.me/250788495604" class="whatsapp">Chat</a>
-
-<script>
-
-/* Scroll animations */
-const elements = document.querySelectorAll(".fade-up");
-
-const observer = new IntersectionObserver(entries => {
-entries.forEach(entry => {
-if(entry.isIntersecting){
-entry.target.classList.add("show");
-}
-});
-});
-
-elements.forEach(el => observer.observe(el));
-
-/* Demo unlock */
-function startPayment(){
-alert("Access granted (demo)");
-document.getElementById("game").classList.remove("hidden");
-}
-
-/* GPS */
-function getLocation(){
-navigator.geolocation.getCurrentPosition(function(pos){
-document.getElementById("location").innerHTML =
-"Lat: "+pos.coords.latitude+" | Lng: "+pos.coords.longitude;
-});
-}
-
-/* Certificate */
-function downloadCertificate(){
-const blob = new Blob(["Musanze Explorer"], {type:'text/plain'});
+const blob = new Blob([content], {type:'text/plain'});
 const link = document.createElement('a');
 link.href = URL.createObjectURL(blob);
 link.download = "certificate.txt";
