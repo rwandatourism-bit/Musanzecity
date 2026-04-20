@@ -6,6 +6,7 @@
 <title>Musanze MyCity</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
+
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
@@ -22,8 +23,7 @@ body {font-family:'Outfit',sans-serif;background:#faf8f4;}
 
 <!-- HERO -->
 <section class="hero text-center py-28 px-6">
-<h1 class="text-5xl" style="font-family:'DM Serif Display'">Musanze MyCity</h1>
-
+<h1 class="text-5xl">Musanze MyCity</h1>
 <p class="mt-6 max-w-xl mx-auto text-white/80">
 Explore Musanze through missions, people and opportunity.
 </p>
@@ -31,18 +31,6 @@ Explore Musanze through missions, people and opportunity.
 <div class="mt-10 flex gap-4 justify-center">
 <button onclick="startExperience()" class="btn">Start Experience</button>
 <a href="#invest" class="btn-alt">Invest in Musanze</a>
-</div>
-</section>
-
-<!-- HOW GAME WORKS -->
-<section class="py-20 text-center">
-<h2 class="text-3xl mb-10">How It Works</h2>
-
-<div class="grid md:grid-cols-4 gap-6 max-w-5xl mx-auto">
-<div class="card">Register</div>
-<div class="card">Pay</div>
-<div class="card">Explore</div>
-<div class="card">Earn</div>
 </div>
 </section>
 
@@ -70,7 +58,7 @@ Explore Musanze through missions, people and opportunity.
 </div>
 </section>
 
-<!-- ROUTE DETAILS -->
+<!-- ROUTE PAGE -->
 <section id="routePage" class="hidden text-center py-20 px-6">
 <h2 id="routeTitle" class="text-3xl mb-6"></h2>
 <p id="routeContent" class="max-w-xl mx-auto text-gray-600"></p>
@@ -88,10 +76,19 @@ Explore Musanze through missions, people and opportunity.
 <div class="card">Taste Imbanda bread</div>
 </div>
 
-<button onclick="getLocation()" class="btn mt-6">Check Location</button>
-<p id="location"></p>
+<button onclick="showCertificateForm()" class="btn mt-6">
+Finish & Get Certificate
+</button>
+</section>
 
-<button onclick="downloadCertificate()" class="btn mt-6">
+<!-- CERTIFICATE FORM -->
+<section id="certForm" class="hidden text-center py-20">
+<h2 class="text-3xl mb-6">Get Your Certificate</h2>
+
+<input id="name" placeholder="Your Name" class="p-3 border rounded mb-3"><br>
+<input id="email" placeholder="Email" class="p-3 border rounded mb-3"><br>
+
+<button onclick="generateCertificate()" class="btn">
 Download Certificate
 </button>
 </section>
@@ -101,7 +98,7 @@ Download Certificate
 <h2 class="text-3xl">Invest in Musanze</h2>
 
 <p class="max-w-xl mx-auto mt-4 text-gray-600">
-Tourism, agriculture, cycling and community experiences offer strong opportunities.
+Tourism, agriculture (potatoes & Imbanda), cycling and community experiences.
 </p>
 </section>
 
@@ -115,23 +112,17 @@ Tourism, agriculture, cycling and community experiences offer strong opportuniti
 <input placeholder="Email" class="w-full p-3 border rounded">
 
 <select class="w-full p-3 border rounded">
-<option>Area of Interest</option>
 <option>Agriculture</option>
 <option>Tourism</option>
 <option>Education</option>
 <option>Sports</option>
 </select>
 
+<textarea placeholder="Your Message" class="w-full p-3 border rounded"></textarea>
+
 <button class="btn w-full">Submit</button>
 
 </form>
-</section>
-
-<!-- LINKS -->
-<section class="text-center py-10">
-<a href="https://www.beyondthegorillasexperience.com/">BGE</a> |
-<a href="https://visitrwanda.com/">Visit Rwanda</a> |
-<a href="https://www.musanze.gov.rw/about/menya-akarere-1">Musanze</a>
 </section>
 
 <script>
@@ -144,16 +135,16 @@ function openRoute(type){
 document.getElementById("routePage").classList.remove("hidden");
 
 if(type==="cultural"){
-document.getElementById("routeTitle").innerHTML="Cultural Route";
-document.getElementById("routeContent").innerHTML="Village life, traditions, storytelling.";
+routeTitle.innerHTML="Cultural Route";
+routeContent.innerHTML="Village life, storytelling, traditions.";
 }
 if(type==="cycling"){
-document.getElementById("routeTitle").innerHTML="Cycling Route";
-document.getElementById("routeContent").innerHTML="Explore Musanze through cycling trails.";
+routeTitle.innerHTML="Cycling Route";
+routeContent.innerHTML="Explore Musanze through cycling culture.";
 }
 if(type==="agri"){
-document.getElementById("routeTitle").innerHTML="Agri Route";
-document.getElementById("routeContent").innerHTML="Potatoes, Imbanda, farming systems.";
+routeTitle.innerHTML="Agri Route";
+routeContent.innerHTML="Potatoes, Imbanda, farming systems.";
 }
 }
 
@@ -161,18 +152,19 @@ function backRoutes(){
 document.getElementById("routePage").classList.add("hidden");
 }
 
-function getLocation(){
-navigator.geolocation.getCurrentPosition(pos=>{
-document.getElementById("location").innerHTML =
-"Lat: "+pos.coords.latitude+" Lng: "+pos.coords.longitude;
-});
+function showCertificateForm(){
+document.getElementById("certForm").classList.remove("hidden");
 }
 
-function downloadCertificate(){
+function generateCertificate(){
+let name = document.getElementById("name").value;
+
 const content = `
 MUSANZE EXPLORER CERTIFICATE
 
-This certifies that you completed the Musanze MyCity experience.
+Awarded to: ${name}
+
+For completing the Musanze MyCity Experience
 `;
 
 const blob = new Blob([content], {type:'text/plain'});
